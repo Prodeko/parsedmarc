@@ -6,9 +6,9 @@ This repo is based of off https://github.com/dragoangel/parsedmarc-dockerized. I
 
 This stack includes:
 
-- [ParseDMARC](https://domainaware.github.io/parsedmarc/) image to analizing reports (builded from Dockerfile, use pypy image)
+- [ParseDMARC](https://domainaware.github.io/parsedmarc/)
 - [Elasticsearch & Kibana](https://www.elastic.co/guide/index.html) to store and visualize parsed data
-- [Nginx](https://docs.nginx.com/) to handle basic authorization and SSL offloading
+- [Nginx](https://docs.nginx.com/) to handle basic authorization and SSL
 
 ## :gear: How-to deploy from scratch
 
@@ -24,7 +24,7 @@ user = reports@prodeko.org
 password = insertpasswordhere
 ```
 
-4. Acquire certificates an put them into the nginx/ssl folder. The files should be named dmarc.prodeko.orgcer and dmarc.prodeko.org.key.
+4. Acquire certificates an put them into the nginx/ssl folder. The files should be named dmarc.prodeko.org.cer and dmarc.prodeko.org.key.
 
 5. Build the containers and push them to Prodeko's Azure Container Registry
 
