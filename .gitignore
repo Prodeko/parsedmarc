@@ -1,0 +1,3 @@
+nginx/ssl/*
+!nginx/ssl/*.example.*
+venv/

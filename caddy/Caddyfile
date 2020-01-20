@@ -1,0 +1,11 @@
+{
+	acme_ca https://acme-staging-v02.api.letsencrypt.org/directory
+}
+
+tls cto@prodeko.org {
+    dns azure
+}
+
+dmarc.prodeko.org
+
+reverse_proxy / localhost:5601
