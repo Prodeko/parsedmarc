@@ -24,7 +24,7 @@ user = reports@prodeko.org
 password = insertpasswordhere
 ```
 
-4. Acquire certificates an put them into the nginx/ssl folder. The files should be named dmarc.prodeko.org.cer and dmarc.prodeko.org.key.
+4. Acquire certificates and put them into the nginx/ssl folder. The files should be named dmarc.prodeko.org.cer and dmarc.prodeko.org.key.
 
 5. Build the containers and push them to Prodeko's Azure Container Registry
 
@@ -44,7 +44,7 @@ docker push prodekoregistry.azurecr.io/parsedmarc/parsedmarc-kibana
 docker push prodekoregistry.azurecr.io/parsedmarc/parsedmarc-elasticsearch
 ```
 
-6. Run `terraform apply` from Prodekon [infrastructure repo](https://github.com/Prodeko/infrastructure).
+6. Run `terraform apply` from Prodeko's [infrastructure repo](https://github.com/Prodeko/infrastructure).
 
    - The ACI configuration for parsedmarc is [here](https://github.com/Prodeko/infrastructure/tree/master/modules/containers/parsedmarc)
 
@@ -56,7 +56,7 @@ Import downloaded kibana_saved_objects.json with override.
 
 ## Notes
 
-In the future NGINX could be replaced with caddy for automating certificates. Now the certificates
+In the future NGINX could be replaced with caddy for automating certificates. Now the certificates need to be acquired manually.
 
 ## Dashboard Sample
 

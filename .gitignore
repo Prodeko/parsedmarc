@@ -1,3 +1,4 @@
 nginx/ssl/*
 !nginx/ssl/*.example.*
 venv/
+.DS_Store
