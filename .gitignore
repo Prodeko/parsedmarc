@@ -1,4 +1,5 @@
 nginx/ssl/*
 !nginx/ssl/*.example.*
 venv/
+parsedmarc/GeoIP.conf
 .DS_Store

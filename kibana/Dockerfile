@@ -1,4 +1,4 @@
-FROM docker.elastic.co/kibana/kibana:7.5.1
+FROM docker.elastic.co/kibana/kibana:7.5.2
 
 ENV SERVER_NAME=kibana
 ENV ELASTICSEARCH_HOSTS=http://localhost:9200

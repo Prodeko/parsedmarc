@@ -48,15 +48,34 @@ docker push prodekoregistry.azurecr.io/parsedmarc/parsedmarc-elasticsearch
 
    - The ACI configuration for parsedmarc is [here](https://github.com/Prodeko/infrastructure/tree/master/modules/containers/parsedmarc)
 
-7. Download & Import [kibana_saved_objects.json](https://raw.githubusercontent.com/domainaware/parsedmarc/master/kibana/kibana_saved_objects.json).
+7. Download & Import [kibana_saved_objects.ndjson](https://raw.githubusercontent.com/domainaware/parsedmarc/master/kibana/export.ndjson).
 
 Go to `https://dmarc.prodeko.org/app/kibana#/management/kibana/objects?_g=()` click on `Import`.
 
-Import downloaded kibana_saved_objects.json with override.
+Import downloaded kibana_saved_objects.ndjson with override.
 
 ## Notes
 
 In the future NGINX could be replaced with caddy for automating certificates. Now the certificates need to be acquired manually.
+
+## Elasticsearch issues
+
+If you are not seeing recent updates in the Kibana dasboard try the following useful commands to debug cluster health and shard allocation issues:
+
+```
+# Run from kibana container
+$ curl -XGET 'localhost:9200/_cluster/health?pretty'
+
+# Source: https://www.datadoghq.com/blog/elasticsearch-unassigned-shards/
+# Understand shard allocation issues
+curl -XGET localhost:9200/_cluster/allocation/explain?pretty
+
+# Delete all shards
+# WARNING: you should restart the container group in order to create the indices again
+curl -XDELETE http://localhost:9200/_all
+```
+
+If nothing else works, deleting all indices from kibana dashboard (or deleting all files inside aci-parsedmarc-elasticsearch-share file share in prodekostorage) and then restarting the container group should help. Remember to import the kibana_saved_objects.ndjson again.
 
 ## Dashboard Sample
 

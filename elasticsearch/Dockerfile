@@ -1,4 +1,4 @@
-FROM docker.elastic.co/elasticsearch/elasticsearch:7.5.1
+FROM docker.elastic.co/elasticsearch/elasticsearch:7.5.2
 
 ENV cluster.name=parsedmarc
 ENV discovery.type=single-node
