@@ -1,6 +1,10 @@
 dmarc.prodeko.org {
   tls cto@prodeko.org
 
+  basicauth /* {
+	  webbitiimi JDJhJDEwJFJ1ZkkvVTdzdFJnZ1VZeUpNOG81cnUzbW42SGRPc3ZQU1ZMcWN6R1d4SFk3QUNsS0FxbEt1
+  }
+
   header / {
     Access-Control-Allow-Origin: https://sharry:9090
     # Define Content Security Policy (CSP)
