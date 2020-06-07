@@ -1,4 +1,7 @@
 nginx/ssl/*
+nginx/htpasswd
+!nginx/htpasswd.example
+nginx/htpasswd
 !nginx/ssl/*.example.*
 venv/
 parsedmarc/GeoIP.conf
