@@ -2,24 +2,55 @@ version: "3.8"
 
 services:
   parsedmarc:
-    image: prodekoregistry.azurecr.io/parsedmarc/parsedmarc-main
+    container_name: "parsedmarc"
     build:
-      context: ./parsedmarc
+      context: .
+      dockerfile: parsedmarc/Dockerfile
+    command: "parsedmarc -c /etc/parsedmarc.ini"
+    tty: true
+    volumes:
+      - ./parsedmarc/parsedmarc.ini:/etc/parsedmarc.ini:z
     restart: unless-stopped
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
 
   elasticsearch:
-    image: prodekoregistry.azurecr.io/parsedmarc/parsedmarc-elasticsearch
-    build:
-      context: ./elasticsearch
+    container_name: "elasticsearch"
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.5.2
+    environment:
+      - cluster.name=parsedmarc
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
     volumes:
       - ./elasticsearch/data/:/usr/share/elasticsearch/data/:z
-    restart: unless-stopped
+    restart: "unless-stopped"
+    healthcheck:
+      test: ["CMD", "curl", "-s", "-f", "http://localhost:9200/_cat/health"]
+      interval: 1m
+      timeout: 10s
+      retries: 3
+      start_period: 30s
 
   kibana:
-    image: prodekoregistry.azurecr.io/parsedmarc/parsedmarc-kibana
-    build:
-      context: ./kibana
+    container_name: "kibana"
+    image: docker.elastic.co/kibana/kibana:7.5.2
+    environment:
+      - server.name=parsedmarc
+      - server.host="0"
+      - elasticsearch.hosts=http://elasticsearch:9200
+      - xpack.monitoring.ui.container.elasticsearch.enabled=true
+    ports:
+      - "5601:5601"
     restart: unless-stopped
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
 
 networks:
   default:
