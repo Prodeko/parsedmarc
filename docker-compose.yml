@@ -1,4 +1,4 @@
-version: "3.7"
+version: "3.8"
 
 services:
   parsedmarc:
@@ -21,8 +21,7 @@ services:
       context: ./kibana
     restart: unless-stopped
 
-  nginx:
-    image: prodekoregistry.azurecr.io/parsedmarc/parsedmarc-nginx
-    build:
-      context: ./nginx
-    restart: unless-stopped
+networks:
+  default:
+    external:
+      name: prodeko-docker-net
