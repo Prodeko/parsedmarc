@@ -22,7 +22,7 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - ./elasticsearch/data/:/usr/share/elasticsearch/data/:z
+      - "parsedmarc-data:/usr/share/elasticsearch/data"
     restart: unless-stopped
 
   kibana:
@@ -38,6 +38,10 @@ services:
     restart: unless-stopped
     depends_on:
       - elasticsearch
+
+volumes:
+  parsedmarc-data:
+    external: true
 
 networks:
   default:
