@@ -12,8 +12,7 @@ services:
       - ./parsedmarc/parsedmarc.ini:/etc/parsedmarc.ini:z
     restart: unless-stopped
     depends_on:
-      elasticsearch:
-        condition: service_healthy
+      - elasticsearch
 
   elasticsearch:
     container_name: "elasticsearch"
@@ -29,13 +28,7 @@ services:
         hard: -1
     volumes:
       - ./elasticsearch/data/:/usr/share/elasticsearch/data/:z
-    restart: "unless-stopped"
-    healthcheck:
-      test: ["CMD", "curl", "-s", "-f", "http://localhost:9200/_cat/health"]
-      interval: 1m
-      timeout: 10s
-      retries: 3
-      start_period: 30s
+    restart: unless-stopped
 
   kibana:
     container_name: "kibana"
@@ -49,8 +42,7 @@ services:
       - "5601:5601"
     restart: unless-stopped
     depends_on:
-      elasticsearch:
-        condition: service_healthy
+      - elasticsearch
 
 networks:
   default:
