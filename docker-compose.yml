@@ -4,12 +4,7 @@ services:
   parsedmarc:
     container_name: "parsedmarc"
     build:
-      context: .
-      dockerfile: parsedmarc/Dockerfile
-    command: "parsedmarc -c /etc/parsedmarc.ini"
-    tty: true
-    volumes:
-      - ./parsedmarc/parsedmarc.ini:/etc/parsedmarc.ini:z
+      context: ./parsedmarc
     restart: unless-stopped
     depends_on:
       - elasticsearch
