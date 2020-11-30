@@ -15,9 +15,9 @@ This stack includes:
 2. Allow IMAP access to reports@prodeko.org in gmail settings. Also allow less secure apps access from the accounts settings.
 3. Run `ansible-playbook playbook.yml --extra-vars '@passwd.yml' --tags parsedmarc` from Prodeko's [infrastructure repo](https://github.com/Prodeko/infrastructure).
 
-4. Download & Import [kibana_saved_objects.ndjson](https://raw.githubusercontent.com/domainaware/parsedmarc/master/kibana/export.ndjson).
+4. Download & Import [exports.ndjson](https://raw.githubusercontent.com/domainaware/parsedmarc/master/kibana/export.ndjson).
 
-Go to `https://dmarc.prodeko.org/app/kibana#/management/kibana/objects?_g=()` click on `Import`.
+Go to `https://dmarc.prodeko.org/app/management/kibana/objects` click on `Import`.
 
 Import downloaded kibana_saved_objects.ndjson with override.
 
