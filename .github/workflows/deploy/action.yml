@@ -1,0 +1,10 @@
+name: Deploy
+runs:
+  using: docker
+  image: docker://prodekoregistry.azurecr.io/infrastructure/prodeko-ci:v1
+  args:
+    [
+      'bash',
+      '-c',
+      'cd /ci && ansible-playbook playbook.yml --extra-vars "@passwd.yml" --tags parsedmarc',
+    ]
