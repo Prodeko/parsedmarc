@@ -1,4 +1,4 @@
-name: Build and deploy
+name: Deploy
 
 on:
   push:
@@ -7,10 +7,16 @@ on:
 
 jobs:
   deploy:
-    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
+      - name: Docker login to ACR
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
 
       - name: Deploy project
         uses: ./.github/workflows/deploy

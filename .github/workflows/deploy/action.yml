@@ -6,5 +6,5 @@ runs:
     [
       'bash',
       '-c',
-      'cd /ci && ansible-playbook playbook.yml --extra-vars "@passwd.yml" --tags parsedmarc',
+      'cd /ci && ansible-playbook playbook.yml --extra-vars "@passwd.yml" --tags parsedmarc --limit prodeko-azure-vm',
     ]
